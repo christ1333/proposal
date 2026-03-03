@@ -37,61 +37,37 @@
     $('#btn-yes').on('click', function() {
         console.log('btn-yes clicked');
         try {
-            var message = 'YES I WILL BE YOUR GIRLFRIEND ❤';
+            var message = 'YES I WILL BE YOUR GIRLFRIEND test ready to be sent';
             var $b = $('#winner-banner');
-            // Prefer Web Share API on mobile — lets user choose Snapchat and prefill the text
+
+            // Show the winner effect first
+            if ($b.length) {
+                $b.find('.winner-text').text('She said YES!');
+                $b.addClass('show');
+                spawnConfetti(80);
+                $('#btn-yes, #btn-no').prop('disabled', true);
+                setTimeout(function() {
+                    $b.removeClass('show');
+                    $('#btn-yes, #btn-no').prop('disabled', false);
+                }, 6000);
+            }
+
+            // Then try to share / open Snapchat (share happens after visual effect started)
             if (navigator.share) {
-                navigator.share({
-                    text: message
-                }).then(function() {
-                    if ($b.length) {
-                        $b.find('.winner-text').text('She said YES!');
-                        $b.addClass('show');
-                        spawnConfetti(80);
-                        $('#btn-yes, #btn-no').prop('disabled', true);
-                        setTimeout(function() {
-                            $b.removeClass('show');
-                            $('#btn-yes, #btn-no').prop('disabled', false);
-                        }, 6000);
-                    }
-                }).catch(function(err) {
-                    // share failed or was cancelled — fallback to opening Snapchat thread
+                navigator.share({ text: message }).catch(function(err) {
                     console.error('navigator.share failed:', err);
-                    if ($b.length) {
-                        $b.find('.winner-text').text('She said YES!');
-                        $b.addClass('show');
-                        spawnConfetti(80);
-                        $('#btn-yes, #btn-no').prop('disabled', true);
-                        setTimeout(function() {
-                            window.location = 'snapchat://';
-                            setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
-                        }, 900);
-                        setTimeout(function() {
-                            $b.removeClass('show');
-                            $('#btn-yes, #btn-no').prop('disabled', false);
-                        }, 6000);
-                    } else {
-                        window.location = 'https://snapchat.com/t/2yyvwuIQ';
-                    }
-                });
-            } else {
-                // No Web Share support: open Snapchat (app or web thread) so user can paste/send manually
-                if ($b.length) {
-                    $b.find('.winner-text').text('She said YES!');
-                    $b.addClass('show');
-                    spawnConfetti(80);
-                    $('#btn-yes, #btn-no').prop('disabled', true);
+                    // fallback to opening Snapchat thread
                     setTimeout(function() {
                         window.location = 'snapchat://';
                         setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
                     }, 900);
-                    setTimeout(function() {
-                        $b.removeClass('show');
-                        $('#btn-yes, #btn-no').prop('disabled', false);
-                    }, 6000);
-                } else {
-                    window.location = 'https://snapchat.com/t/2yyvwuIQ';
-                }
+                });
+            } else {
+                // No Web Share support: open Snapchat (app or web thread)
+                setTimeout(function() {
+                    window.location = 'snapchat://';
+                    setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
+                }, 900);
             }
         } catch (e) {
             console.error('Error in #btn-yes handler:', e);
