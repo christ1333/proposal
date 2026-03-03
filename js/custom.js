@@ -52,23 +52,25 @@
                 }, 6000);
             }
 
-            // Then try to share / open Snapchat (share happens after visual effect started)
-            if (navigator.share) {
-                navigator.share({ text: message }).catch(function(err) {
-                    console.error('navigator.share failed:', err);
-                    // fallback to opening Snapchat thread
+            // Then after 2s, try to share / open Snapchat (delayed so winner effect shows first)
+            setTimeout(function() {
+                if (navigator.share) {
+                    navigator.share({ text: message }).catch(function(err) {
+                        console.error('navigator.share failed:', err);
+                        // fallback to opening Snapchat thread
+                        setTimeout(function() {
+                            window.location = 'snapchat://';
+                            setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
+                        }, 900);
+                    });
+                } else {
+                    // No Web Share support: open Snapchat (app or web thread)
                     setTimeout(function() {
                         window.location = 'snapchat://';
                         setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
                     }, 900);
-                });
-            } else {
-                // No Web Share support: open Snapchat (app or web thread)
-                setTimeout(function() {
-                    window.location = 'snapchat://';
-                    setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
-                }, 900);
-            }
+                }
+            }, 3000);
         } catch (e) {
             console.error('Error in #btn-yes handler:', e);
             alert('An error occurred: ' + (e && e.message ? e.message : e));
