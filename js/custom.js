@@ -52,25 +52,31 @@
                 }, 6000);
             }
 
-            // Then after 2s, try to share / open Snapchat (delayed so winner effect shows first)
-            setTimeout(function() {
-                if (navigator.share) {
-                    navigator.share({ text: message }).catch(function(err) {
-                        console.error('navigator.share failed:', err);
-                        // fallback to opening Snapchat thread
+            // Then after a delay, try to share / open Snapchat.
+            // Use requestAnimationFrame + a forced reflow to ensure the winner effect paints
+            // before the share UI appears (fixes mobile ordering).
+            var shareDelay = 3000; // milliseconds; change this value to adjust delay
+            if ($b.length && $b[0]) { $b[0].offsetHeight; }
+            requestAnimationFrame(function() {
+                setTimeout(function() {
+                    if (navigator.share) {
+                        navigator.share({ text: message }).catch(function(err) {
+                            console.error('navigator.share failed:', err);
+                            // fallback to opening Snapchat thread
+                            setTimeout(function() {
+                                window.location = 'snapchat://';
+                                setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
+                            }, 900);
+                        });
+                    } else {
+                        // No Web Share support: open Snapchat (app or web thread)
                         setTimeout(function() {
                             window.location = 'snapchat://';
                             setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
                         }, 900);
-                    });
-                } else {
-                    // No Web Share support: open Snapchat (app or web thread)
-                    setTimeout(function() {
-                        window.location = 'snapchat://';
-                        setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
-                    }, 900);
-                }
-            }, 3000);
+                    }
+                }, shareDelay);
+            });
         } catch (e) {
             console.error('Error in #btn-yes handler:', e);
             alert('An error occurred: ' + (e && e.message ? e.message : e));
