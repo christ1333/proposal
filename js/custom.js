@@ -37,7 +37,7 @@
     $('#btn-yes').on('click', function() {
         console.log('btn-yes clicked');
         try {
-            var message = 'YES I WILL BE YOUR GIRLFRIEND test ready to be sent';
+            var message = 'YES I WILL BE YOUR GIRLFRIEND ❤';
             var $b = $('#winner-banner');
             // Prefer Web Share API on mobile — lets user choose Snapchat and prefill the text
             if (navigator.share) {
