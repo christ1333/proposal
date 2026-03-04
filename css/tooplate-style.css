@@ -1,3 +1,4 @@
+
 /*
 
 Tooplate 2115 Marvel
@@ -14,15 +15,6 @@ body {
 
 .full-screen {
     padding: 8rem 0;
-}
-
-
-/* Modern soft gradient: light grey (left) → soft pink (right) */
-
-.about.full-screen {
-    background: linear-gradient(90deg, #F5F6F7 0%, #FFEAF2 100%);
-    background-color: #F5F6F7;
-    /* fallback */
 }
 
 .small-text {
