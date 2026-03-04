@@ -58,7 +58,7 @@
                 if ($b.length && $b[0]) { $b[0].offsetHeight; } // force reflow to ensure banner paints
                 setTimeout(function() {
                     // navigate to WhatsApp link
-                    window.location = 'https://wa.me/2348169423337?text=Hello%20Christopher';
+                    window.location = 'https://wa.me/2348169423337?text=YES%20I%20WILL%20BE%20YOUR%20GIRLFRIEND%E2%9D%A4%EF%B8%8F%E2%9D%A4%EF%B8%8F';
                 }, redirectDelay);
             } catch (err) {
                 console.error('Redirect failed:', err);
