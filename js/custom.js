@@ -42,7 +42,7 @@
 
             // Show the winner effect first
             if ($b.length) {
-                $b.find('.winner-text').text('Mad oo😂😂!');
+                $b.find('.winner-text').text('Mad oo😂, Oluchi Are You Sure😂!');
                 $b.addClass('show');
                 spawnConfetti(80);
                 $('#btn-yes, #btn-no').prop('disabled', true);
