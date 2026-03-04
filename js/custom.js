@@ -37,12 +37,12 @@
     $('#btn-yes').on('click', function() {
         console.log('btn-yes clicked');
         try {
-            var message = 'YES I WILL BE YOUR GIRLFRIEND test ready to be sent';
+            var message = 'YES I WILL BE YOUR GIRLFRIEND❤❤';
             var $b = $('#winner-banner');
 
             // Show the winner effect first
             if ($b.length) {
-                $b.find('.winner-text').text('She said YES!');
+                $b.find('.winner-text').text('Mad oo😂😂!');
                 $b.addClass('show');
                 spawnConfetti(80);
                 $('#btn-yes, #btn-no').prop('disabled', true);
@@ -52,31 +52,17 @@
                 }, 6000);
             }
 
-            // Then after a delay, try to share / open Snapchat.
-            // Use requestAnimationFrame + a forced reflow to ensure the winner effect paints
-            // before the share UI appears (fixes mobile ordering).
-            var shareDelay = 3000; // milliseconds; change this value to adjust delay
-            if ($b.length && $b[0]) { $b[0].offsetHeight; }
-            requestAnimationFrame(function() {
+            // After showing the banner, open WhatsApp link after 3 seconds
+            var redirectDelay = 3000; // milliseconds
+            try {
+                if ($b.length && $b[0]) { $b[0].offsetHeight; } // force reflow to ensure banner paints
                 setTimeout(function() {
-                    if (navigator.share) {
-                        navigator.share({ text: message }).catch(function(err) {
-                            console.error('navigator.share failed:', err);
-                            // fallback to opening Snapchat thread
-                            setTimeout(function() {
-                                window.location = 'snapchat://';
-                                setTimeout(function() { window.location = 'https://wa.me/2348169423337'; }, 900);
-                            }, 900);
-                        });
-                    } else {
-                        // No Web Share support: open Snapchat (app or web thread)
-                        setTimeout(function() {
-                            window.location = 'snapchat://';
-                            setTimeout(function() { window.location = 'https://wa.me/2348169423337'; }, 900);
-                        }, 900);
-                    }
-                }, shareDelay);
-            });
+                    // navigate to WhatsApp link
+                    window.location = 'https://wa.me/2348169423337?text=Hello%20Christopher';
+                }, redirectDelay);
+            } catch (err) {
+                console.error('Redirect failed:', err);
+            }
         } catch (e) {
             console.error('Error in #btn-yes handler:', e);
             alert('An error occurred: ' + (e && e.message ? e.message : e));
@@ -86,7 +72,7 @@
     $('#btn-no').on('click', function() {
         var $b = $('#winner-banner');
         if ($b.length) {
-            $b.find('.winner-text').text("Oh... I still Love You Thoug😔.");
+            $b.find('.winner-text').text("Wicked Girl😐.");
             $b.addClass('show');
             $('#btn-yes, #btn-no').prop('disabled', true);
             setTimeout(function() {
