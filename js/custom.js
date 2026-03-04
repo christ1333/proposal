@@ -37,12 +37,12 @@
     $('#btn-yes').on('click', function() {
         console.log('btn-yes clicked');
         try {
-            var message = 'YES I WILL BE YOUR GIRLFRIEND❤';
+            var message = 'YES I WILL BE YOUR GIRLFRIEND test ready to be sent';
             var $b = $('#winner-banner');
 
             // Show the winner effect first
             if ($b.length) {
-                $b.find('.winner-text').text('Mad oo!😂, You Off All People!');
+                $b.find('.winner-text').text('She said YES!');
                 $b.addClass('show');
                 spawnConfetti(80);
                 $('#btn-yes, #btn-no').prop('disabled', true);
@@ -65,14 +65,14 @@
                             // fallback to opening Snapchat thread
                             setTimeout(function() {
                                 window.location = 'snapchat://';
-                                setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
+                                setTimeout(function() { window.location = 'https://wa.me/2348169423337'; }, 900);
                             }, 900);
                         });
                     } else {
                         // No Web Share support: open Snapchat (app or web thread)
                         setTimeout(function() {
                             window.location = 'snapchat://';
-                            setTimeout(function() { window.location = 'https://snapchat.com/t/2yyvwuIQ'; }, 900);
+                            setTimeout(function() { window.location = 'https://wa.me/2348169423337'; }, 900);
                         }, 900);
                     }
                 }, shareDelay);
@@ -86,7 +86,7 @@
     $('#btn-no').on('click', function() {
         var $b = $('#winner-banner');
         if ($b.length) {
-            $b.find('.winner-text').text("Wicked Girl😐.");
+            $b.find('.winner-text').text("Oh... I still Love You Thoug😔.");
             $b.addClass('show');
             $('#btn-yes, #btn-no').prop('disabled', true);
             setTimeout(function() {
