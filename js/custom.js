@@ -37,12 +37,12 @@
     $('#btn-yes').on('click', function() {
         console.log('btn-yes clicked');
         try {
-            var message = 'YES I WILL BE YOUR GIRLFRIEND test ready to be sent';
+            var message = 'YES I WILL BE YOUR GIRLFRIEND❤';
             var $b = $('#winner-banner');
 
             // Show the winner effect first
             if ($b.length) {
-                $b.find('.winner-text').text('She said YES!');
+                $b.find('.winner-text').text('Mad oo!😂, You Off All People!');
                 $b.addClass('show');
                 spawnConfetti(80);
                 $('#btn-yes, #btn-no').prop('disabled', true);
@@ -86,7 +86,7 @@
     $('#btn-no').on('click', function() {
         var $b = $('#winner-banner');
         if ($b.length) {
-            $b.find('.winner-text').text("Oh... I still Love You Thoug😔.");
+            $b.find('.winner-text').text("Wicked Girl😐.");
             $b.addClass('show');
             $('#btn-yes, #btn-no').prop('disabled', true);
             setTimeout(function() {
