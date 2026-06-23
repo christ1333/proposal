@@ -1,0 +1,122 @@
+(function($) {
+
+    "use strict";
+
+    // COLOR MODE
+    $('.color-mode').click(function() {
+        $('.color-mode-icon').toggleClass('active')
+        $('body').toggleClass('dark-mode')
+    })
+
+    // HEADER
+    $(".navbar").headroom();
+
+    // PROJECT CAROUSEL
+    $('.owl-carousel').owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 10,
+        nav: true
+    });
+
+    // SMOOTHSCROLL
+    $(function() {
+        $('.nav-link, .custom-btn-link').on('click', function(event) {
+            var $anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top - 49
+            }, 1000);
+            event.preventDefault();
+        });
+    });
+
+    // TOOLTIP
+    $('.social-links a').tooltip();
+
+    // Proposal buttons: show winner/confetti on Yes, gentle message on No
+    $('#btn-yes').on('click', function() {
+        console.log('btn-yes clicked');
+        try {
+            var message = 'YES!, I Am All In Old Man❤❤';
+            var $b = $('#winner-banner');
+
+            // Show the winner effect first
+            if ($b.length) {
+                $b.find('.winner-text').text('Asam🌹,   Thank You ML ❤');
+                $b.addClass('show');
+                spawnConfetti(80);
+                $('#btn-yes, #btn-no').prop('disabled', true);
+                setTimeout(function() {
+                    $b.removeClass('show');
+                    $('#btn-yes, #btn-no').prop('disabled', false);
+                }, 6000);
+            }
+
+            // After showing the banner, open WhatsApp link after 3 seconds
+            var redirectDelay = 3000; // milliseconds
+            try {
+                if ($b.length && $b[0]) { $b[0].offsetHeight; } // force reflow to ensure banner paints
+                setTimeout(function() {
+                    // navigate to WhatsApp link
+                    window.location = 'https://wa.me/2348169423337?text=YES%20I%20WILL%20BE%20YOUR%20GIRLFRIEND';
+                }, redirectDelay);
+            } catch (err) {
+                console.error('Redirect failed:', err);
+            }
+        } catch (e) {
+            console.error('Error in #btn-yes handler:', e);
+            alert('An error occurred: ' + (e && e.message ? e.message : e));
+        }
+    });
+
+    $('#btn-no').on('click', function() {
+        var $b = $('#winner-banner');
+        if ($b.length) {
+            $b.find('.winner-text').text("Ouch!!!, Wicked Girl😐.");
+            $b.addClass('show');
+            $('#btn-yes, #btn-no').prop('disabled', true);
+            setTimeout(function() {
+                $b.removeClass('show');
+                $('#btn-yes, #btn-no').prop('disabled', false);
+            }, 3500);
+        }
+    });
+
+    // WINNER banner + confetti on page load
+    function spawnConfetti(count) {
+        var colors = ['#ff3b3b', '#ffb54d', '#ffd166', '#6ee7b7', '#7cc6ff', '#c77cff'];
+        for (var i = 0; i < count; i++) {
+            (function() {
+                var left = (Math.random() * 100).toFixed(2) + '%';
+                var el = $('<div class="confetti"></div>');
+                var color = colors[Math.floor(Math.random() * colors.length)];
+                var duration = (2 + Math.random() * 3).toFixed(2) + 's';
+                var delay = (Math.random() * 0.6).toFixed(2) + 's';
+                el.css({
+                    left: left,
+                    background: color,
+                    animation: 'confettiFall ' + duration + ' linear',
+                    'animation-delay': delay
+                });
+                $('body').append(el);
+                // remove after animation
+                setTimeout(function() { el.remove(); }, (parseFloat(duration) + parseFloat(delay) + 0.2) * 1000);
+            })();
+        }
+    }
+
+    $(window).on('load', function() {
+        // show banner
+        setTimeout(function() {
+            var $b = $('#winner-banner');
+            if ($b.length) {
+                $b.addClass('show');
+                // hide after 5s
+                setTimeout(function() { $b.removeClass('show'); }, 5000);
+            }
+            // spawn confetti
+            spawnConfetti(40);
+        }, 400);
+    });
+
+})(jQuery);
